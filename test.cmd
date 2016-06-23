@@ -6,9 +6,7 @@ PLUGIN_OUT='drone-comments/linting'
 PLUGIN_IF='/\w+/.test(`$(cat reports/tslint-prose.txt)`)'
 PLUGIN_BODY='**Linting Errors Found**\n```txt\n$(cat reports/tslint-prose.txt)\n```'
 
-echo $PLUGIN_BODY
 export PLUGIN_BODY=$PLUGIN_BODY
-
 
 docker run --rm                \
 	 -e PLUGIN_OUT=$PLUGIN_OUT   \
@@ -16,7 +14,7 @@ docker run --rm                \
 	 -e PLUGIN_BODY=$PLUGIN_BODY \
 	 -v $(pwd):$(pwd)            \
 	 -w $(pwd)                   \
-	 dryclean/drone-write-file
+	 dryclean/drone-write-status
 
 cd ..
 

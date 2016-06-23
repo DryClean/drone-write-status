@@ -1,1 +1,1 @@
-docker build --rm -t dryclean/drone-write-file .
+docker build --rm -t dryclean/drone-write-status .

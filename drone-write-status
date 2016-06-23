@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
-echo DRONE_WRITE_FILE
 # replace "`" with "\`"
 PLUGIN_IF=${PLUGIN_IF//\`/\\\`}
 eval echo 'module.exports = '$(echo \"$PLUGIN_IF\") > /node/plugin-if.js

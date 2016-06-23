@@ -10,10 +10,9 @@ RUN apk update && \
 
 WORKDIR /node
 
-ADD drone-write-file /node/
+ADD drone-write-status /node/
 ADD run.js /node/
 
-RUN chmod +x /node/drone-write-file
+RUN chmod +x /node/drone-write-status
 
-ENTRYPOINT ["/node/drone-write-file"]
-
+ENTRYPOINT ["/node/drone-write-status"]
