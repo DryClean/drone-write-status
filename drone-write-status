@@ -1,16 +1,18 @@
 #!/bin/sh
 
 # replace "`" with "\`"
-PLUGIN_IF=${PLUGIN_IF//\`/\\\`}
-eval echo 'module.exports = '$(echo \"$PLUGIN_IF\") > /node/plugin-if.js
+PLUGIN_SUCCEED_IF=${PLUGIN_SUCCEED_IF//\`/\\\`}
+eval echo 'module.exports = '$(echo \"$PLUGIN_SUCCEED_IF\" | sed 's/\\n//g' ) > /node/plugin-succeed-if.js
 
-# replace "`" with "\\\`"
-PLUGIN_BODY=${PLUGIN_BODY//\`/\\\\\\\`}
-# replace "\\n" with "\\\\n"
-PLUGIN_BODY=${PLUGIN_BODY//\\n/\\\\n}
-# replace end of lines with \n
-PLUGIN_BODY=$(eval echo \"$PLUGIN_BODY\" | sed 's/$/\\n/')
-echo 'module.exports = `'$PLUGIN_BODY'`' > /node/plugin-body.js
+echo /node/plugin-succeed-if.js
+echo $(cat /node/plugin-succeed-if.js)
+
+# replace "`" with "\`"
+PLUGIN_URL=${PLUGIN_URL//\`/\\\`}
+eval echo 'module.exports = \`'$(echo \"$PLUGIN_URL\")'\`' > /node/plugin-url.js
+
+echo /node/plugin-url.js
+echo $(cat /node/plugin-url.js)
 
 # Remove if exists, ignore errors
 rm $PLUGIN_OUT || true

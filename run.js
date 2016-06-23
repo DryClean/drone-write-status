@@ -1,7 +1,8 @@
 
-const pluginif = require('./plugin-if')
-const pluginbody = require('./plugin-body')
+const pluginsucceedif = require('./plugin-succeed-if.js')
+const pluginurl = require('./plugin-url.js')
 
-if (pluginif) {
-  console.log(pluginbody)
-}
+console.log(JSON.stringify({
+  status: pluginsucceedif ? 'pass' : 'fail',
+  link: pluginurl,
+}))
