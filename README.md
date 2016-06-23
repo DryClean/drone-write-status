@@ -2,7 +2,7 @@
 
 Write a file in your pipeline using a combination of nodejs and shell.
 
-Unfortunately, multiline JavaScript requires semicolons.
+Unfortunately, **multiline JavaScript requires semicolons**.
 
 ```yaml
 pipeline:
