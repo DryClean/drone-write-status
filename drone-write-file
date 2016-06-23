@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo DRONE_WRITE_FILE
+# replace "`" with "\`"
+PLUGIN_IF=${PLUGIN_IF//\`/\\\`}
+eval echo 'module.exports = '$(echo \"$PLUGIN_IF\") > /node/plugin-if.js
+
+# replace "`" with "\\\`"
+PLUGIN_BODY=${PLUGIN_BODY//\`/\\\\\\\`}
+# replace "\\n" with "\\\\n"
+PLUGIN_BODY=${PLUGIN_BODY//\\n/\\\\n}
+# replace end of lines with \n
+PLUGIN_BODY=$(eval echo \"$PLUGIN_BODY\" | sed 's/$/\\n/')
+echo 'module.exports = `'$PLUGIN_BODY'`' > /node/plugin-body.js
+
+# Remove if exists, ignore errors
+rm $PLUGIN_OUT || true
+# Create directories if not exists, ignore errors
+mkdir -p $(dirname $PLUGIN_OUT) || true
+
+node /node/run.js > $PLUGIN_OUT
